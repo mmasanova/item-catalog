@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+{% block content %}
+<ul>
+	{% if categories %}
+		{% for category in categories %}
+			<li>category.name</li>
+		{% endfor %}
+	{% else %}
+		<span>There are no categories.</span>
+	{% endif %}
+</ul>
+
+<ul>
+	{% if items %}
+		{% for i in items %}
+			<li>i.name</li>
+		{% endfor %}
+	{% else %}
+		<span>There are no items.</span>
+	{% endif %}
+</ul>
+{% endblock %}
