@@ -30,7 +30,19 @@ def addCategory():
 	else:
 		return render_template('addCategory.html')
 
-@app.route('/category/<int:category_id>/item/add', methods=['POST','GET'])
+@app.route('/category/<int:category_id>/edit', methods=['POST', 'GET'])
+def editCategory(category_id):
+	category = session.query(Category).filter_by(id = category_id).one()
+
+	if request.method == 'POST':
+		category.name = request.form['name']
+		session.add(category)
+		session.commit()
+		return redirect(url_for('showCatalog'))
+	else:
+		return render_template('editCategory.html', category = category)
+
+@app.route('/category/<int:category_id>/item/add', methods=['POST', 'GET'])
 def addItem(category_id):
 	if request.method == 'POST':
 		item = Item(name = request.form['name'], description = request.form['description'],

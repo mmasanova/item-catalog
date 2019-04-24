@@ -1,0 +1,8 @@
+{% extends "main.html" %}
+{% block content %}
+<form method="POST" action= "{{url_for('editCategory', category_id = category.id)}}" method = 'POST'>
+	<label for="name">Category</label>
+	<input type="text" id="name" name="name" value="{{category.name}}"/>
+	<input type="submit" value="Update"/>
+</form>
+{% endblock %}
