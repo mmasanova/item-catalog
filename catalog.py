@@ -30,6 +30,16 @@ def addCategory():
 	else:
 		return render_template('addCategory.html')
 
+@app.route('/category/<int:category_id>/item/add', methods=['POST','GET'])
+def addItem(category_id):
+	if request.method == 'POST':
+		item = Item(name = request.form['name'], description = request.form['description'],
+			long_description = request.form['long_description'], user_id = 1, category_id = category_id)
+		session.add(item)
+		session.commit()
+		return redirect(url_for('showCatalog'))
+	else:
+		return render_template('addItem.html', category_id = category_id)
 
 if __name__ == '__main__':
   app.secret_key = 'secret_catalog_app'

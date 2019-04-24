@@ -1,0 +1,12 @@
+{% extends "main.html" %}
+{% block content %}
+<form method="POST" action= "{{url_for('addItem', category_id = category_id)}}" method = 'POST'>
+	<label for="name">Item</label>
+	<input type="text" id="name" name="name" />
+	<label for="description">Description</label>
+	<input type="text" id="description" name="description" />
+	<label for="long_description">Long Description</label>
+	<input type="text" id="long_description" name="long_description" />
+	<input type="submit" value="Create"/>
+</form>
+{% endblock %}
