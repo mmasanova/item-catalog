@@ -20,6 +20,16 @@ def showCatalog():
 	items = session.query(Item).filter_by(category_id = category_id).all()
 	return render_template('catalog.html', category_id = category_id, categories = categories, items = items)
 
+@app.route('/category/add', methods=['GET', 'POST'])
+def addCategory():
+	if request.method == 'POST':
+		category = Category(name = request.form['name'], user_id = 1)
+		session.add(category)
+		session.commit()
+		return redirect(url_for('showCatalog'))
+	else:
+		return render_template('addCategory.html')
+
 
 if __name__ == '__main__':
   app.secret_key = 'secret_catalog_app'
