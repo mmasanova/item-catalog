@@ -53,6 +53,20 @@ def addItem(category_id):
 	else:
 		return render_template('addItem.html', category_id = category_id)
 
+@app.route('/category/<int:category_id>/item/<int:item_id>', methods=['POST', 'GET'])
+def editItem(category_id, item_id):
+	item = session.query(Item).filter_by(id = item_id).one()
+
+	if request.method == 'POST':
+		item.name = request.form['name']
+		item.description = request.form['description']
+		item.long_description = request.form['long_description']
+		session.add(item)
+		session.commit()
+		return	redirect(url_for('showCatalog'))
+	else:
+		return render_template('editItem.html', category_id = category_id, item = item)
+
 if __name__ == '__main__':
   app.secret_key = 'secret_catalog_app'
   app.debug = True
