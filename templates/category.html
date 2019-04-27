@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+{% block content %}
+<a href="{{url_for('showCatalog')}}" class="flat-button">
+	<i class="mdi mdi-arrow-left"></i>
+	Catalog
+</a>
+<h1 id="heading">{{category.name}}</h1>
+<ul>
+	{% if items %}
+		{% for item in items %}
+			<li>
+				<a>{{item.name}}</a>
+			</li>
+		{% endfor %}
+	{% else %}
+		<span class="no-info">There are no items.</span>
+	{% endif %}
+</ul>
+<a href="{{url_for('addItem', category_id = category.id)}}" class="floating-button">
+	<i class="mdi mdi-plus"></i>
+</a>
+{% endblock %}

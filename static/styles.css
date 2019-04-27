@@ -17,10 +17,17 @@
 	box-sizing: border-box;
 }
 
+html {
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	background-color: #efefef;
 	font-family: Roboto, Arial;
 	font-size: 18px;
+	margin: 0;
+	padding: 0;
 }
 
 ul {
@@ -40,6 +47,8 @@ li a {
 	width: 100%;
 	padding: 0 15px;
 	cursor: pointer;
+	text-decoration: none;
+	color: #000;
 }
 
 form {
@@ -112,6 +121,12 @@ input {
 	text-decoration: none;
 	display: inline-block;
 	padding: 0 10px 0 0;
+	position: absolute;
+}
+
+.no-info {
+	display: block;
+	text-align: center;
 }
 
 @media screen and (min-width: 500px) {
