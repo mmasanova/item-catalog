@@ -1,9 +1,10 @@
 {% extends "main.html" %}
 {% block content %}
+<h1 id="heading">Item Catalog</h1>
 <ul>
 	{% if categories %}
 		{% for category in categories %}
-			<li class="subheading">
+			<li>
 				<a>{{category.name}}</a>
 			</li>
 		{% endfor %}
@@ -11,7 +12,7 @@
 		<span>There are no categories.</span>
 	{% endif %}
 </ul>
-<button class="floating-button">
+<a href="{{url_for('addCategory')}}" class="floating-button">
 	<i class="mdi mdi-plus"></i>
-</button>
+</a>
 {% endblock %}

@@ -20,7 +20,7 @@
 body {
 	background-color: #efefef;
 	font-family: Roboto, Arial;
-	font-size: 20px;
+	font-size: 18px;
 }
 
 ul {
@@ -42,17 +42,28 @@ li a {
 	cursor: pointer;
 }
 
+form {
+	padding: 30px 15px;
+}
+
+input {
+	font-size: 18px;
+}
+
 #heading {
 	font-family: 'Satisfy', cursive;
 	padding: 10px 15px;
 	margin: 0;
-	text-align: left;
+	text-align: center;
 	box-sizing: border-box;
 }
 
-.subheading, h2 {
+.label, h2 {
 	font-family: 'Satisfy', cursive;
+	font-size: 1.2em;
 	color: #00BCD4;
+	padding: 0 0 10px 0;
+	display: block;
 }
 
 .container {
@@ -62,27 +73,50 @@ li a {
 	min-height: 300px;
 }
 
+.button {
+	display: block;
+	margin: 20px 0;
+	padding: 15px 20px;
+	border-width: 0;
+	outline: none;
+	border-radius: 2px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+	background-color: #00BCD4;
+	transition: background-color .3s;
+}
+
 .floating-button {
 	position: absolute;
 	bottom: 30px;
 	right: 20px;
-	border-radius: 30px;
+	border-radius: 36px;
 	border: none;
-	width: 60px;
-	height: 60px;
 	box-sizing: border-box;
 	background-color: #00BCD4;
-	font-size: 24px;
 	cursor: pointer
+}
+
+.floating-button i, .flat-button i {
+	padding: 16px 18px;
+	display: inline-block;
+	font-size: 24px;
+}
+
+.flat-button i {
+	padding: 16px 10px 0 18px;
+	display: inline-block;
+	font-size: 24px;
+}
+
+.flat-button {
+	text-decoration: none;
+	display: inline-block;
+	padding: 0 10px 0 0;
 }
 
 @media screen and (min-width: 500px) {
 	.container {
 		width: 70%;
 		margin: 20px auto;
-	}
-
-	#heading {
-		text-align: center;
 	}
 }

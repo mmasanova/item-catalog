@@ -1,8 +1,12 @@
 {% extends "main.html" %}
 {% block content %}
+<a href="{{url_for('showCatalog')}}" class="flat-button">
+	<i class="mdi mdi-arrow-left"></i>
+	Cancel
+</a>
 <form method="POST" action= "{{url_for('addCategory')}}" method = 'POST'>
-	<label for="name">Category</label>
+	<label for="name" class="label">Category</label>
 	<input type="text" id="name" name="name" />
-	<input type="submit" value="Create"/>
+	<input type="submit" value="Create" class="button" />
 </form>
 {% endblock %}
