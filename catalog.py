@@ -42,6 +42,17 @@ def editCategory(category_id):
 	else:
 		return render_template('editCategory.html', category = category)
 
+@app.route('/category/<int:category_id>/delete', methods=['POST', 'GET'])
+def deleteCategory(category_id):
+	category = session.query(Category).filter_by(id = category_id).one()
+
+	if request.method == 'POST':
+		session.delete(category)
+		session.commit()
+		return redirect(url_for('showCatalog'))
+	else:
+		return render_template('deleteCategory.html', category = category)
+
 @app.route('/category/<int:category_id>/item/add', methods=['POST', 'GET'])
 def addItem(category_id):
 	if request.method == 'POST':

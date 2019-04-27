@@ -1,6 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
-<form method="POST" action= "{{url_for('editItem', category_id = category_id, item_id = item.id)}}" method = 'POST'>
+<form method="POST" action= "{{url_for('editItem', category_id = category_id, item_id = item.id)}}">
 	<label for="name">Item</label>
 	<input type="text" id="name" name="name" value="{{item.name}}" />
 	<label for="description">Description</label>
