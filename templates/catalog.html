@@ -3,20 +3,15 @@
 <ul>
 	{% if categories %}
 		{% for category in categories %}
-			<li>{{category.name}}</li>
+			<li class="subheading">
+				<a>{{category.name}}</a>
+			</li>
 		{% endfor %}
 	{% else %}
 		<span>There are no categories.</span>
 	{% endif %}
 </ul>
-
-<ul>
-	{% if items %}
-		{% for i in items %}
-			<li>{{i.name}}</li>
-		{% endfor %}
-	{% else %}
-		<span>There are no items.</span>
-	{% endif %}
-</ul>
+<button class="floating-button">
+	<i class="mdi mdi-plus"></i>
+</button>
 {% endblock %}
