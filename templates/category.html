@@ -5,6 +5,14 @@
 	<span class="back-label">Catalog</span>
 </a>
 <h1 id="heading">{{category.name}}</h1>
+<div id="toolbar">
+	<a href="{{url_for('editCategory', category_id = category.id)}}">
+		<i class="mdi mdi-pencil"></i>
+	</a>
+	<a href="{{url_for('deleteCategory', category_id = category.id)}}">
+		<i class="mdi mdi-delete"></i>
+	</a>
+</div>
 <ul>
 	{% if items %}
 		{% for item in items %}
