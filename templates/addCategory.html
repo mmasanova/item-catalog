@@ -2,11 +2,12 @@
 {% block content %}
 <a href="{{url_for('showCatalog')}}" class="flat-button">
 	<i class="mdi mdi-arrow-left"></i>
-	Cancel
+	<span class="back-label">Cancel</span>
 </a>
+<h1 id="heading">Item Catalog</h1>
 <form method="POST" action= "{{url_for('addCategory')}}" method = 'POST'>
 	<label for="name" class="label">Category</label>
 	<input type="text" id="name" name="name" />
-	<input type="submit" value="Create" class="button" />
+	<input type="submit" value="Add Category" class="button" />
 </form>
 {% endblock %}

@@ -20,6 +20,7 @@
 html {
 	margin: 0;
 	padding: 0;
+	height: 100%;
 }
 
 body {
@@ -28,11 +29,13 @@ body {
 	font-size: 18px;
 	margin: 0;
 	padding: 0;
+	height: 100%;
 }
 
 ul {
 	list-style: none;
 	padding: 0;
+	margin: 0;
 }
 
 li {
@@ -51,12 +54,23 @@ li a {
 	color: #000;
 }
 
-form {
-	padding: 30px 15px;
+a {
+	color: #000;
 }
 
-input {
+form, .form {
+	padding: 20px 15px;
+}
+
+form label, form input {
+	display: block;
+}
+
+form input {
 	font-size: 18px;
+	margin: 0 0 10px 0;
+	border: 1px solid #ccc;
+	line-height: 25px;
 }
 
 #heading {
@@ -67,7 +81,7 @@ input {
 	box-sizing: border-box;
 }
 
-.label, h2 {
+form label, h2 {
 	font-family: 'Satisfy', cursive;
 	font-size: 1.2em;
 	color: #00BCD4;
@@ -79,7 +93,7 @@ input {
 	width: 100%;
 	background-color: #fff;
 	border: 1px solid #ddd;
-	min-height: 300px;
+	min-height: 100%;
 }
 
 .button {
@@ -114,7 +128,8 @@ input {
 .flat-button i {
 	padding: 16px 10px 0 18px;
 	display: inline-block;
-	font-size: 24px;
+	font-size: 32px;
+	color: #000;
 }
 
 .flat-button {
@@ -127,11 +142,49 @@ input {
 .no-info {
 	display: block;
 	text-align: center;
+	padding: 15px;
+}
+
+.back-label {
+	display: none;
+}
+
+.category {
+	font-style: italic;
+}
+
+#toolbar {
+	background-color: #00BCD4;
+	height: 45px;
+	font-size: 24px;
+	line-height: 45px;
+}
+
+#toolbar a {
+	width: 45px;
+	margin-left: 5px;
+	display: block;
+    float: right;
+    text-align: center;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 500px) {
+	body {
+		background-color: #efefef;
+		padding: 5% 0;
+	}
+
 	.container {
 		width: 70%;
-		margin: 20px auto;
+		margin: auto;
+		min-height: 90%;
+	}
+
+	.back-label {
+		display: block;
+	    float: right;
+	    line-height: 70px;
+	    color: #000;
 	}
 }

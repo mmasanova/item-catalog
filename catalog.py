@@ -59,6 +59,12 @@ def deleteCategory(category_id):
 	else:
 		return render_template('deleteCategory.html', category = category)
 
+@app.route('/category/<int:category_id>/item/<int:item_id>', methods=['POST', 'GET'])
+def showItem(category_id, item_id):
+	category = session.query(Category).filter_by(id = category_id).one()
+	item = session.query(Item).filter_by(id = item_id).one()
+	return render_template('item.html', category = category, item = item)
+
 @app.route('/category/<int:category_id>/item/add', methods=['POST', 'GET'])
 def addItem(category_id):
 	if request.method == 'POST':
@@ -66,12 +72,12 @@ def addItem(category_id):
 			long_description = request.form['long_description'], user_id = 1, category_id = category_id)
 		session.add(item)
 		session.commit()
-		return redirect(url_for('showCatalog'))
+		return redirect(url_for('showCategory', category_id = category_id))
 	else:
-		return render_template('addItem.html', category_id = category_id)
+		category = session.query(Category).filter_by(id = category_id).one()
+		return render_template('addItem.html', category = category)
 
 @app.route('/category/<int:category_id>/item/<int:item_id>/edit', methods=['POST', 'GET'])
-@app.route('/category/<int:category_id>/item/<int:item_id>', methods=['POST', 'GET'])
 def editItem(category_id, item_id):
 	item = session.query(Item).filter_by(id = item_id).one()
 

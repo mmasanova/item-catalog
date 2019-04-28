@@ -2,14 +2,14 @@
 {% block content %}
 <a href="{{url_for('showCatalog')}}" class="flat-button">
 	<i class="mdi mdi-arrow-left"></i>
-	Catalog
+	<span class="back-label">Catalog</span>
 </a>
 <h1 id="heading">{{category.name}}</h1>
 <ul>
 	{% if items %}
 		{% for item in items %}
 			<li>
-				<a>{{item.name}}</a>
+				<a href="{{url_for('showItem', category_id = category.id, item_id = item.id)}}">{{item.name}}</a>
 			</li>
 		{% endfor %}
 	{% else %}
