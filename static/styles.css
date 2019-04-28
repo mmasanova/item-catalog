@@ -60,17 +60,21 @@ a {
 
 form, .form {
 	padding: 20px 15px;
+	max-width: 600px;
+	margin: auto;
 }
 
 form label, form input {
 	display: block;
 }
 
-form input {
+form input, form textarea {
 	font-size: 18px;
 	margin: 0 0 10px 0;
 	border: 1px solid #ccc;
 	line-height: 25px;
+	width: 100%;
+	max-width: 400px;
 }
 
 #heading {
@@ -106,6 +110,7 @@ form label, h2 {
 	box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
 	background-color: #00BCD4;
 	transition: background-color .3s;
+	width: auto;
 }
 
 .floating-button {
@@ -151,6 +156,10 @@ form label, h2 {
 
 .category {
 	font-style: italic;
+}
+
+.warning {
+	color: #000;
 }
 
 #toolbar {

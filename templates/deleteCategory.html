@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 {% block content %}
 <form action="{{url_for('deleteCategory', category_id = category.id)}}" method="POST">
-	<label for="name">Category {{category.name}} will be deleted. Do you wish to continue?</label>
+	<p class="warning">Category {{category.name}} will be deleted. Do you wish to continue?</p>
 	<input type="submit" value="Delete"/>
 </form>
 {% endblock %}
