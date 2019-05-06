@@ -162,6 +162,15 @@ form label, h2 {
 	color: #000;
 }
 
+.flash {
+	border: none;
+	padding: 0 15px;
+}
+
+.error {
+	color: red;
+}
+
 #toolbar {
 	background-color: #00BCD4;
 	height: 45px;

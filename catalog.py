@@ -29,10 +29,14 @@ def showCategory(category_id):
 @app.route('/category/add', methods=['GET', 'POST'])
 def addCategory():
 	if request.method == 'POST':
-		category = Category(name = request.form['name'], user_id = 1)
-		session.add(category)
-		session.commit()
-		return redirect(url_for('showCatalog'))
+		if (request.form['name']):
+			category = Category(name = request.form['name'], user_id = 1)
+			session.add(category)
+			session.commit()
+			return redirect(url_for('showCatalog'))
+		else:
+			flash('Category name is required')
+			return render_template('catalog')
 	else:
 		return render_template('addCategory.html')
 
@@ -68,11 +72,15 @@ def showItem(category_id, item_id):
 @app.route('/category/<int:category_id>/item/add', methods=['POST', 'GET'])
 def addItem(category_id):
 	if request.method == 'POST':
-		item = Item(name = request.form['name'], description = request.form['description'],
-			long_description = request.form['long_description'], user_id = 1, category_id = category_id)
-		session.add(item)
-		session.commit()
-		return redirect(url_for('showCategory', category_id = category_id))
+		if (request.form['name']):
+			item = Item(name = request.form['name'], description = request.form['description'],
+				long_description = request.form['long_description'], user_id = 1, category_id = category_id)
+			session.add(item)
+			session.commit()
+			return redirect(url_for('showCategory', category_id = category_id))
+		else:
+			flash('Item name is required.')
+			return redirect(url_for('addItem', category_id = category_id))
 	else:
 		category = session.query(Category).filter_by(id = category_id).one()
 		return render_template('addItem.html', category = category)
