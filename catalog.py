@@ -112,6 +112,36 @@ def deleteItem(category_id, item_id):
 	else:
 		return render_template('deleteItem.html', category = category, item = item)
 
+# JSON API endpoint to view all categories
+@app.route('/categories/JSON')
+def categoriesJSON():
+    categories = session.query(Category).all()
+    return jsonify(categories=[c.serialize for c in categories])
+
+# JSON API endpoint to view a single category
+@app.route('/category/<int:category_id>/JSON')
+def categoryJSON(category_id):
+	category = session.query(Category).filter_by(id = category_id).one()
+	return jsonify(category = category.serialize)
+
+# JSON API endpoint to view category items
+@app.route('/category/<int:category_id>/items/JSON')
+def itemsJSON(category_id):
+	items = session.query(Item).filter_by(category_id = category_id).all()
+	return jsonify(items = [i.serialize for i in items])
+
+# JSON API endpoint to view a category item
+@app.route('/category/<int:category_id>/items/<int:item_id>/JSON')
+def categoryItemJSON(category_id, item_id):
+	item = session.query(Item).filter_by(category_id = category_id).filter_by(id = item_id).one()
+	return jsonify(item = item.serialize)
+
+# JSON API endpoint to view an arbitrary item based on id
+@app.route('/item/<int:item_id>/JSON')
+def itemJSON(item_id):
+	item = session.query(Item).filter_by(id = item_id).one()
+	return jsonify(item = item.serialize)
+
 if __name__ == '__main__':
   app.secret_key = 'secret_catalog_app'
   app.debug = True
