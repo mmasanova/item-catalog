@@ -225,9 +225,8 @@ def editCategory(category_id):
         return redirect('/login')
 
     category = session.query(Category).filter_by(id=category_id).one()
-    creator = getUserInfo(category.user_id)
 
-    if (login_session['email'] == creator.email):
+    if (login_session['user_id'] == category.user_id):
         if request.method == 'POST':
             if (request.form['name']):
                 category.name = request.form['name']
@@ -251,9 +250,8 @@ def deleteCategory(category_id):
         return redirect('/login')
 
     category = session.query(Category).filter_by(id=category_id).one()
-    creator = getUserInfo(category.user_id)
 
-    if (login_session['email'] == creator.email):
+    if (login_session['user_id'] == category.user_id):
         if request.method == 'POST':
             session.delete(category)
             session.commit()
@@ -316,9 +314,8 @@ def editItem(category_id, item_id):
 
     category = session.query(Category).filter_by(id=category_id).one()
     item = session.query(Item).filter_by(id=item_id).one()
-    creator = getUserInfo(item.user_id)
 
-    if (login_session['email'] == creator.email):
+    if (login_session['user_id'] == item.user_id):
         if request.method == 'POST':
             if (request.form['name']):
                 item.name = request.form['name']
@@ -344,9 +341,8 @@ def deleteItem(category_id, item_id):
 
     category = session.query(Category).filter_by(id=category_id).one()
     item = session.query(Item).filter_by(id=item_id).one()
-    creator = getUserInfo(item.user_id)
 
-    if (login_session['email'] == creator.email):
+    if (login_session['user_id'] == item.user_id):
         if request.method == 'POST':
             session.delete(item)
             session.commit()
