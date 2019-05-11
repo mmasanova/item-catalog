@@ -171,13 +171,24 @@ def showCatalog():
   category_id = 1
   categories = session.query(Category).order_by(asc(Category.name)).all()
   items = session.query(Item).filter_by(category_id = category_id).all()
-  return render_template('catalog.html', category_id = category_id, categories = categories, items = items, login_session=login_session)
+
+  template = 'catalog.html'
+
+  if 'username' not in login_session:
+    template = 'publicCatalog.html'
+
+  return render_template(template, category_id = category_id, categories = categories, items = items, login_session=login_session)
 
 @app.route('/category/<int:category_id>', methods=['GET', 'POST'])
 def showCategory(category_id):
   category = session.query(Category).filter_by(id = category_id).one()
   items = session.query(Item).filter_by(category_id = category_id).all()
-  return render_template('category.html', category = category, items = items, login_session=login_session)
+  template = 'category.html'
+
+  if 'username' not in login_session:
+    template = 'publicCategory.html'
+
+  return render_template(template, category = category, items = items, login_session=login_session)
 
 @app.route('/category/add', methods=['GET', 'POST'])
 def addCategory():
@@ -245,7 +256,13 @@ def deleteCategory(category_id):
 def showItem(category_id, item_id):
   category = session.query(Category).filter_by(id = category_id).one()
   item = session.query(Item).filter_by(id = item_id).one()
-  return render_template('item.html', category=category, item=item, login_session=login_session)
+
+  template = 'item.html'
+
+  if 'username' not in login_session:
+    template = 'publicItem.html'
+
+  return render_template(template, category=category, item=item, login_session=login_session)
 
 @app.route('/category/<int:category_id>/item/add', methods=['POST', 'GET'])
 def addItem(category_id):

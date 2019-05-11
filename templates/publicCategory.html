@@ -1,0 +1,31 @@
+{% extends "main.html" %}
+{% block content %}
+<a href="{{url_for('showCatalog')}}" class="flat-button">
+	<i class="mdi mdi-arrow-left"></i>
+	<span class="back-label">Catalog</span>
+</a>
+<h1 id="heading">{{category.name}}</h1>
+<div class='flash error'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+</div>
+<ul>
+	{% if items %}
+		{% for item in items %}
+			<li>
+				<a href="{{url_for('showItem', category_id = category.id, item_id = item.id)}}">{{item.name}}</a>
+			</li>
+		{% endfor %}
+	{% else %}
+		<span class="no-info">There are no items.</span>
+	{% endif %}
+</ul>
+{% endblock %}
