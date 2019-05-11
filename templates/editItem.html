@@ -23,7 +23,7 @@
 	<label for="description">Description</label>
 	<input type="text" id="description" name="description" value="{{item.description}}" />
 	<label for="long_description">Long Description</label>
-	<textarea id="long_description" rows="4" name="long_description" value="{{item.long_description}}"></textarea>
+	<textarea id="long_description" rows="4" name="long_description">{{item.long_description}}</textarea>
 	<input type="submit" value="Update Item" class="button" />
 </form>
 {% endblock %}
