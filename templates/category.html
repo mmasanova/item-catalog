@@ -6,16 +6,16 @@
 </a>
 <h1 id="heading">{{category.name}}</h1>
 <div id="toolbar">
-	<a href="{{url_for('editCategory', category_id = category.id)}}">
+	<a href="{{url_for('editCategory', category_id=category.id)}}">
 		<i class="mdi mdi-pencil"></i>
 	</a>
-	<a href="{{url_for('deleteCategory', category_id = category.id)}}">
+	<a href="{{url_for('deleteCategory', category_id=category.id)}}">
 		<i class="mdi mdi-delete"></i>
 	</a>
 </div>
 <div class='flash error'>
-		      {% with messages = get_flashed_messages() %}
-      {% if messages %}
+	{% with messages = get_flashed_messages() %}
+     	{% if messages %}
 
         <ul>
         {% for message in messages %}
@@ -29,14 +29,14 @@
 	{% if items %}
 		{% for item in items %}
 			<li>
-				<a href="{{url_for('showItem', category_id = category.id, item_id = item.id)}}">{{item.name}}</a>
+				<a href="{{url_for('showItem', category_id=category.id, item_id=item.id)}}">{{item.name}}</a>
 			</li>
 		{% endfor %}
 	{% else %}
 		<span class="no-info">There are no items.</span>
 	{% endif %}
 </ul>
-<a href="{{url_for('addItem', category_id = category.id)}}" class="floating-button">
+<a href="{{url_for('addItem', category_id=category.id)}}" class="floating-button">
 	<i class="mdi mdi-plus"></i>
 </a>
 {% endblock %}

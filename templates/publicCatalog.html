@@ -2,8 +2,8 @@
 {% block content %}
 <h1 id="heading">Item Catalog</h1>
 <div class='flash error'>
-		      {% with messages = get_flashed_messages() %}
-      {% if messages %}
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
 
         <ul>
         {% for message in messages %}
@@ -17,7 +17,7 @@
 	{% if categories %}
 		{% for category in categories %}
 			<li>
-				<a href="{{url_for('showCategory', category_id = category.id)}}">{{category.name}}</a>
+				<a href="{{url_for('showCategory', category_id=category.id)}}">{{category.name}}</a>
 			</li>
 		{% endfor %}
 	{% else %}

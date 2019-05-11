@@ -1,6 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
-<a href="{{url_for('showCategory', category_id = category.id)}}" class="flat-button">
+<a href="{{url_for('showCategory', category_id=category.id)}}" class="flat-button">
 	<i class="mdi mdi-arrow-left"></i>
 	<span class="back-label">{{category.name}}</span>
 </a>
@@ -17,7 +17,7 @@
         {% endif %}
     {% endwith %}
 </div>
-<form method="POST" action= "{{url_for('editCategory', category_id = category.id)}}">
+<form method="POST" action="{{url_for('editCategory', category_id=category.id)}}">
 	<label for="name">Category</label>
 	<input type="text" id="name" name="name" value="{{category.name}}"/>
 	<input type="submit" value="Update" class="button" />

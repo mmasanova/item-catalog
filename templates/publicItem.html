@@ -1,13 +1,13 @@
 {% extends "main.html" %}
 {% block content %}
-<a href="{{url_for('showCategory', category_id = category.id)}}" class="flat-button">
+<a href="{{url_for('showCategory', category_id=category.id)}}" class="flat-button">
 	<i class="mdi mdi-arrow-left"></i>
 	<span class="back-label">{{category.name}}</span>
 </a>
 <h1 id="heading">{{item.name}}</h1>
 <div class='flash error'>
-		      {% with messages = get_flashed_messages() %}
-      {% if messages %}
+	{% with messages = get_flashed_messages() %}
+        {% if messages %}
 
         <ul>
         {% for message in messages %}

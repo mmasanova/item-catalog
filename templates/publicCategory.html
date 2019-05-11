@@ -6,8 +6,8 @@
 </a>
 <h1 id="heading">{{category.name}}</h1>
 <div class='flash error'>
-		      {% with messages = get_flashed_messages() %}
-      {% if messages %}
+	{% with messages = get_flashed_messages() %}
+     	{% if messages %}
 
         <ul>
         {% for message in messages %}
@@ -21,7 +21,7 @@
 	{% if items %}
 		{% for item in items %}
 			<li>
-				<a href="{{url_for('showItem', category_id = category.id, item_id = item.id)}}">{{item.name}}</a>
+				<a href="{{url_for('showItem', category_id=category.id, item_id=item.id)}}">{{item.name}}</a>
 			</li>
 		{% endfor %}
 	{% else %}

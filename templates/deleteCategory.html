@@ -1,11 +1,11 @@
 {% extends "main.html" %}
 {% block content %}
-<a href="{{url_for('showCategory', category_id = category.id)}}" class="flat-button">
+<a href="{{url_for('showCategory', category_id=category.id)}}" class="flat-button">
 	<i class="mdi mdi-arrow-left"></i>
 	<span class="back-label">{{category.name}}</span>
 </a>
 <h1 id="heading">{{category.name}}</h1>
-<form action="{{url_for('deleteCategory', category_id = category.id)}}" method="POST">
+<form action="{{url_for('deleteCategory', category_id=category.id)}}" method="POST">
 	<p class="warning">Category {{category.name}} will be deleted. Do you wish to continue?</p>
 	<input type="submit" value="Delete" class="button" />
 </form>
