@@ -1,0 +1,18 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="{{ url_for('static', filename='login.js') }}"></script>
+		<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='materialdesignicons.min.css') }}">
+	</head>
+	<body>
+		<div id="result" class="container">
+			<h1 id="heading">Item Catalog</h1>
+			<button id="gLoginButton" data-state="{{STATE}}" class="button">Login with Google</button>
+		</div>
+	</body>
+</html>

@@ -8,6 +8,14 @@
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='materialdesignicons.min.css') }}">
 	</head>
 	<body>
+		<div id="logout-section">
+			{% if 'username' in login_session %}
+				<span id="loggedin-info">Logged in as {{login_session['username']}},</span>
+				<a id="logout-link" href="{{ url_for('glogout')}}">Logout</a>
+			{% else %}
+				<a id="login-link" class="login-link" href="{{ url_for('showLogin')}}">Login</a>
+			{% endif %}
+		</div>
 		<div class="container">
 			{% block content %}
 			{% endblock %}
