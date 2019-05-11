@@ -284,24 +284,29 @@ def addItem(category_id):
     if 'username' not in login_session:
         return redirect('/login')
 
-    if request.method == 'POST':
-        if (request.form['name']):
-            item = Item(
-                name=request.form['name'],
-                description=request.form['description'],
-                long_description=request.form['long_description'],
-                user_id=login_session['user_id'],
-                category_id=category_id
-                )
-            session.add(item)
-            session.commit()
-            return redirect(url_for('showCategory', category_id=category_id))
+    category = session.query(Category).filter_by(id=category_id).one()
+
+    if (login_session['user_id'] == category.user_id):
+        if request.method == 'POST':
+            if (request.form['name']):
+                item = Item(
+                    name=request.form['name'],
+                    description=request.form['description'],
+                    long_description=request.form['long_description'],
+                    user_id=login_session['user_id'],
+                    category_id=category_id
+                    )
+                session.add(item)
+                session.commit()
+                return redirect(url_for('showCategory', category_id=category_id))
+            else:
+                flash('Item name is required.')
+                return redirect(url_for('addItem', category_id=category_id))
         else:
-            flash('Item name is required.')
-            return redirect(url_for('addItem', category_id=category_id))
+            return render_template('addItem.html', category=category, login_session=login_session)
     else:
-        category = session.query(Category).filter_by(id=category_id).one()
-        return render_template('addItem.html', category=category, login_session=login_session)
+        flash('You can only add items to categories created by you.')
+        return render_template('category.html', category=category, login_session=login_session)
 
 
 @app.route('/category/<int:category_id>/item/<int:item_id>/edit', methods=['POST', 'GET'])
