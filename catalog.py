@@ -188,7 +188,7 @@ def addCategory():
 			return redirect(url_for('showCatalog'))
 		else:
 			flash('Category name is required')
-			return render_template('catalog')
+			return render_template('addCategory.html')
 	else:
 		return render_template('addCategory.html')
 
