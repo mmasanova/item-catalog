@@ -32,6 +32,11 @@ body {
 	height: 100%;
 }
 
+textarea {
+	font-family: Roboto, Arial;
+	font-size: 18px;
+}
+
 ul {
 	list-style: none;
 	padding: 0;
