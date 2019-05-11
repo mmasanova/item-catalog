@@ -36,3 +36,7 @@ Only tested on Chrome, should run on Safari and other webkit browsers.
 * Jquery
 * Flask
 * python
+
+## Resources used
+
+Udacity Full Stack Nanodegree Course
