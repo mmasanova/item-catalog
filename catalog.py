@@ -26,6 +26,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+# Show login page
 @app.route('/login')
 def showLogin():
     state = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
@@ -33,6 +34,7 @@ def showLogin():
     return render_template('login.html', STATE=state)
 
 
+# Show logout page
 @app.route('/logout')
 def showLogout():
     if 'username' in login_session:
@@ -41,6 +43,7 @@ def showLogout():
         return redirect(url_for('showCatalog'))
 
 
+# Authorize Google account user
 @app.route('/glogin', methods=['POST'])
 def glogin():
     if request.args.get('state') != login_session['state']:
@@ -119,6 +122,7 @@ def glogin():
     return render_template('loginConfirmation.html', login_session=login_session)
 
 
+# Logout Google account user from item catalog
 @app.route('/glogout')
 def glogout():
     access_token = login_session.get('access_token')
@@ -153,6 +157,7 @@ def glogout():
         return response
 
 
+# Retrieve user id based no email address
 def getUserID(email):
     try:
         user = session.query(User).filter_by(email=email).one()
@@ -161,11 +166,13 @@ def getUserID(email):
         return None
 
 
+# Retrieve user information based on user id
 def getUserInfo(user_id):
     user = session.query(User).filter_by(id=user_id).one()
     return user
 
 
+# Create new user account within item catalog database
 def createUser(login_session):
     newUser = User(name=login_session['username'], email=login_session['email'], picture=login_session['picture'])
     session.add(newUser)
@@ -174,6 +181,7 @@ def createUser(login_session):
     return user.id
 
 
+# Show main catalog page
 @app.route('/')
 @app.route('/catalog')
 def showCatalog():
@@ -189,6 +197,7 @@ def showCatalog():
     return render_template(template, category_id=category_id, categories=categories, items=items, login_session=login_session)
 
 
+# Show category detail
 @app.route('/category/<int:category_id>', methods=['GET', 'POST'])
 def showCategory(category_id):
     category = session.query(Category).filter_by(id=category_id).one()
@@ -201,6 +210,7 @@ def showCategory(category_id):
     return render_template(template, category=category, items=items, login_session=login_session)
 
 
+# Show form to add category and add new category
 @app.route('/category/add', methods=['GET', 'POST'])
 def addCategory():
     if 'username' not in login_session:
@@ -219,6 +229,7 @@ def addCategory():
         return render_template('addCategory.html', login_session=login_session)
 
 
+# Show form to edit category and update category in database
 @app.route('/category/<int:category_id>/edit', methods=['POST', 'GET'])
 def editCategory(category_id):
     if 'username' not in login_session:
@@ -239,11 +250,13 @@ def editCategory(category_id):
         else:
             return render_template('editCategory.html', category=category, login_session=login_session)
     else:
+        # Redirect user to category page
         flash('You can only edit categories created by you.')
         items = session.query(Item).filter_by(category_id=category_id).all()
         return render_template('category.html', category=category, items=items, login_session=login_session)
 
 
+# Show form to delete category and delete category from database
 @app.route('/category/<int:category_id>/delete', methods=['POST', 'GET'])
 def deleteCategory(category_id):
     if 'username' not in login_session:
@@ -259,11 +272,13 @@ def deleteCategory(category_id):
         else:
             return render_template('deleteCategory.html', category=category, login_session=login_session)
     else:
+        # Redirect user to category page
         flash('You can only delete categories created by you.')
         items = session.query(Item).filter_by(category_id=category_id).all()
         return render_template('category.html', category=category, items=items, login_session=login_session)
 
 
+# Show item detail
 @app.route('/category/<int:category_id>/item/<int:item_id>', methods=['POST', 'GET'])
 def showItem(category_id, item_id):
     category = session.query(Category).filter_by(id=category_id).one()
@@ -277,6 +292,7 @@ def showItem(category_id, item_id):
     return render_template(template, category=category, item=item, login_session=login_session)
 
 
+# Show form for adding item and add the item to database
 @app.route('/category/<int:category_id>/item/add', methods=['POST', 'GET'])
 def addItem(category_id):
     if 'username' not in login_session:
@@ -303,10 +319,12 @@ def addItem(category_id):
         else:
             return render_template('addItem.html', category=category, login_session=login_session)
     else:
+        # Redirect user to category page
         flash('You can only add items to categories created by you.')
         return render_template('category.html', category=category, login_session=login_session)
 
 
+# Show form for editing item and update item in database
 @app.route('/category/<int:category_id>/item/<int:item_id>/edit', methods=['POST', 'GET'])
 def editItem(category_id, item_id):
     if 'username' not in login_session:
@@ -330,10 +348,12 @@ def editItem(category_id, item_id):
         else:
             return render_template('editItem.html', category=category, item=item, login_session=login_session)
     else:
+        # Redirect user to item detail page
         flash('You can only edit items created by you.')
         return render_template('item.html', category=category, item=item, login_session=login_session)
 
 
+# Show form for deleting item and delete item from database
 @app.route('/category/<int:category_id>/item/<int:item_id>/delete', methods=['POST', 'GET'])
 def deleteItem(category_id, item_id):
     if 'username' not in login_session:
@@ -350,6 +370,7 @@ def deleteItem(category_id, item_id):
         else:
             return render_template('deleteItem.html', category=category, item=item, login_session=login_session)
     else:
+        # Redirect user to item detail page
         flash('You can only delete items created by you.')
         return render_template('item.html', category=category, item=item, login_session=login_session)
 

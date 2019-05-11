@@ -1,4 +1,5 @@
 
+/* Load the gapi.client library */
 function start() {
     gapi.load('auth2', function() {
             auth2 = gapi.auth2.init({
@@ -7,6 +8,7 @@ function start() {
     });
 }
 
+/* Process authentication result */
 function logInCallback(authResult) {
     if (authResult['code']) {
         let $gLoginButton = $('#gLoginButton');
@@ -47,6 +49,7 @@ function logInCallback(authResult) {
     }
 }
 
+/* Log Google account user out */
 function logout() {
     $('#logout-info').hide();
 
@@ -77,11 +80,13 @@ function logout() {
     });
 }
 
+/* Display messages and erros */
 function displayMessage(message) {
     $('#message').html(message);
     $('#login-back').css('display', 'inline-block');
 }
 
+/* Bind button events */
 $(document).ready(function() {
     let $gLoginButton = $('#gLoginButton');
     let $gLogoutButton = $('#gLogoutButton');
