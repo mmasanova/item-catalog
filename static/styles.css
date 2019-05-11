@@ -97,7 +97,8 @@ form label, h2 {
 	width: 100%;
 	background-color: #fff;
 	border: 1px solid #ddd;
-	min-height: 100%;
+	min-height: calc(100% - 51px);
+	position: relative;
 }
 
 .button {
@@ -144,6 +145,7 @@ form label, h2 {
 	display: inline-block;
 	padding: 0 10px 0 0;
 	position: absolute;
+	left: 0;
 }
 
 .no-info {
@@ -216,15 +218,19 @@ form label, h2 {
 	margin: auto;
 }
 
-#gLoginButton {
+.login-button {
 	margin: 60px auto;
 	display: block;
 }
 
-#login-back {
+#logout-info {
+	width: 100%;
+	text-align: center;
+}
+
+.back {
 	text-decoration: none;
 	font-size: 13.3333px;
-	display: none;
 }
 
 #result {
@@ -243,6 +249,7 @@ form label, h2 {
 		width: 70%;
 		margin: auto;
 		min-height: 90%;
+		max-width: 600px;
 	}
 
 	.back-label {

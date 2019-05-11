@@ -5,7 +5,6 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
 		<script src="{{ url_for('static', filename='login.js') }}"></script>
-		<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 		<link rel=stylesheet type=text/css href="{{ url_for('static', filename='materialdesignicons.min.css') }}">
 	</head>
@@ -16,7 +15,10 @@
 				<span class="back-label">Catalog</span>
 			</a>
 			<h1 id="heading">Item Catalog</h1>
-			<button id="gLoginButton" data-state="{{STATE}}" class="button login-button">Login with Google</button>
+			<div id="logout-info">
+				<p>Log out {{username}}?</p>
+				<button id="gLogoutButton" class="button login-button">Logout</button>
+			</div>
 			<span id="message"></span>
 		</div>
 	</body>

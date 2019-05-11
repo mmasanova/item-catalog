@@ -30,6 +30,12 @@ def showLogin():
   login_session['state'] = state
   return render_template('login.html', STATE=state)
 
+@app.route('/logout')
+def showLogout():
+  if 'username' in login_session:
+    return render_template('logout.html', username=login_session['username'])
+  else:
+    return redirect(url_for('showCatalog'))
 
 @app.route('/glogin', methods=['POST'])
 def glogin():
@@ -117,9 +123,7 @@ def glogout():
     response.headers['Content-Type'] = 'application/json'
     return response
 
-  print 'In gdisconnect access token is %s', access_token
-  print 'User name is: '
-  print login_session['username']
+  username = login_session['username']
 
   url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
   h = httplib2.Http()
@@ -134,7 +138,7 @@ def glogout():
     del login_session['username']
     del login_session['email']
     del login_session['picture']
-    response = make_response(json.dumps('Successfully disconnected.'), 200)
+    response = make_response(json.dumps('%s successfully logged out.' % username), 200)
     response.headers['Content-Type'] = 'application/json'
     return response
   else:

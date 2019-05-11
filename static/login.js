@@ -29,31 +29,71 @@ function logInCallback(authResult) {
                         window.location.href = "/";
                     }, 2000);
                 } else if (authResult['error']) {
-                    displayError('User authorization failed.');
+                    displayMessage('User authorization failed.');
                     console.log('There was an error: ' + authResult['error']);
                 } else {
-                    displayError('Failed to make a server-side call.');
+                    displayMessage('Failed to make a server-side call.');
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
-                displayError('Authorization request failed: ' + errorThrown);
+                displayMessage('Authorization request failed: ' + errorThrown);
             },
             processData:false,
             data: authResult['code']
         });
     } else {
         // handle error
-        displayError('Failed to make a server-side call. Check sign in configuration and console.');
+        displayMessage('Failed to make a server-side call. Check sign in configuration and console.');
     }
 }
 
-function displayError(errorMessage) {
-    $('#error').html(errorMessage);
+function logout() {
+    $('#logout-info').hide();
+
+    $.ajax({
+        type: 'GET',
+        url: '/glogout',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        contentType: 'application/octet-stream; charset=utf-8',
+        success: function(result) {
+            if (result) {
+                displayMessage(result + '<br><br>Redirecting...');
+
+                setTimeout(function() {
+                    window.location.href = "/";
+                }, 2000);
+            } else if (authResult['error']) {
+                displayMessage('User logout failed.');
+                console.log('There was an error: ' + authResult['error']);
+            } else {
+                displayMessage('Failed to make a server-side call.');
+            }
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            displayMessage('Log out request failed: ' + errorThrown);
+        }
+    });
+}
+
+function displayMessage(message) {
+    $('#message').html(message);
     $('#login-back').css('display', 'inline-block');
 }
 
 $(document).ready(function() {
-    $('#gLoginButton').click(function() {
-        auth2.grantOfflineAccess().then(logInCallback);
-    });
+    let $gLoginButton = $('#gLoginButton');
+    let $gLogoutButton = $('#gLogoutButton');
+
+    if ($gLoginButton.length > 0) {
+        $gLoginButton.click(function() {
+            auth2.grantOfflineAccess().then(logInCallback);
+        });
+    }
+
+    if ($gLogoutButton.length > 0) {
+        $gLogoutButton.show();
+        $gLogoutButton.click(logout);
+    }
 });
