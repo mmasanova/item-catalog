@@ -24,22 +24,32 @@ function logInCallback(authResult) {
             success: function(result) {
                 if (result) {
                     $('#result').html('Login Successful!<br><br>'+ result + '<br>Redirecting...');
+
                     setTimeout(function() {
                         window.location.href = "/";
                     }, 2000);
                 } else if (authResult['error']) {
+                    displayError('User authorization failed.');
                     console.log('There was an error: ' + authResult['error']);
                 } else {
-                    $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                    displayError('Failed to make a server-side call.');
                 }
             },
+            error: function(jqXHR, textStatus, errorThrown) {
+                displayError('Authorization request failed: ' + errorThrown);
+            },
             processData:false,
-            data:authResult['code']
+            data: authResult['code']
         });
     } else {
         // handle error
-        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+        displayError('Failed to make a server-side call. Check sign in configuration and console.');
     }
+}
+
+function displayError(errorMessage) {
+    $('#error').html(errorMessage);
+    $('#login-back').css('display', 'inline-block');
 }
 
 $(document).ready(function() {

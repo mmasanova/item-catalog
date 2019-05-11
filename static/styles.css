@@ -221,6 +221,12 @@ form label, h2 {
 	display: block;
 }
 
+#login-back {
+	text-decoration: none;
+	font-size: 13.3333px;
+	display: none;
+}
+
 #result {
 	margin-top: 5%;
 	text-align: center;

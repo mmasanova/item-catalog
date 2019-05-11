@@ -110,6 +110,7 @@ def glogin():
 @app.route('/glogout')
 def glogout():
   access_token = login_session.get('access_token')
+
   if access_token is None:
     print 'Access Token is None'
     response = make_response(json.dumps('Current user not connected.'), 401)
