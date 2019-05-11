@@ -13,6 +13,18 @@
 		<i class="mdi mdi-delete"></i>
 	</a>
 </div>
+<div class='flash error'>
+		      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+
+        <ul>
+        {% for message in messages %}
+            <li> <strong> {{ message }} </strong> </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    {% endwith %}
+</div>
 <div class="form">
 	<p class="category">Category: {{category.name}}</p>
 	<p>{{item.description}}</p>
