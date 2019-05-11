@@ -177,7 +177,7 @@ def showCatalog():
 def showCategory(category_id):
   category = session.query(Category).filter_by(id = category_id).one()
   items = session.query(Item).filter_by(category_id = category_id).all()
-  return render_template('category.html', category = category, items = items)
+  return render_template('category.html', category = category, items = items, login_session=login_session)
 
 @app.route('/category/add', methods=['GET', 'POST'])
 def addCategory():
@@ -192,9 +192,9 @@ def addCategory():
       return redirect(url_for('showCatalog'))
     else:
       flash('Category name is required.')
-      return render_template('addCategory.html')
+      return render_template('addCategory.html', login_session=login_session)
   else:
-    return render_template('addCategory.html')
+    return render_template('addCategory.html', login_session=login_session)
 
 @app.route('/category/<int:category_id>/edit', methods=['POST', 'GET'])
 def editCategory(category_id):
@@ -213,13 +213,13 @@ def editCategory(category_id):
         return redirect(url_for('showCatalog'))
       else:
         flash('Category name is required.')
-        return render_template('editCategory.html', category=category)
+        return render_template('editCategory.html', category = category, login_session=login_session)
     else:
-      return render_template('editCategory.html', category=category)
+      return render_template('editCategory.html', category = category, login_session=login_session)
   else:
     flash('You can only edit categories created by you.')
     items = session.query(Item).filter_by(category_id = category_id).all()
-    return render_template('category.html', category = category, items = items)
+    return render_template('category.html', category = category, items = items, login_session=login_session)
 
 @app.route('/category/<int:category_id>/delete', methods=['POST', 'GET'])
 def deleteCategory(category_id):
@@ -235,17 +235,17 @@ def deleteCategory(category_id):
       session.commit()
       return redirect(url_for('showCatalog'))
     else:
-      return render_template('deleteCategory.html', category = category)
+      return render_template('deleteCategory.html', category=category, login_session=login_session)
   else:
     flash('You can only delete categories created by you.')
     items = session.query(Item).filter_by(category_id = category_id).all()
-    return render_template('category.html', category = category, items = items)
+    return render_template('category.html', category=category, items=items, login_session=login_session)
 
 @app.route('/category/<int:category_id>/item/<int:item_id>', methods=['POST', 'GET'])
 def showItem(category_id, item_id):
   category = session.query(Category).filter_by(id = category_id).one()
   item = session.query(Item).filter_by(id = item_id).one()
-  return render_template('item.html', category = category, item = item)
+  return render_template('item.html', category=category, item=item, login_session=login_session)
 
 @app.route('/category/<int:category_id>/item/add', methods=['POST', 'GET'])
 def addItem(category_id):
@@ -264,7 +264,7 @@ def addItem(category_id):
       return redirect(url_for('addItem', category_id = category_id))
   else:
     category = session.query(Category).filter_by(id = category_id).one()
-    return render_template('addItem.html', category = category)
+    return render_template('addItem.html', category = category, login_session=login_session)
 
 @app.route('/category/<int:category_id>/item/<int:item_id>/edit', methods=['POST', 'GET'])
 def editItem(category_id, item_id):
@@ -286,12 +286,12 @@ def editItem(category_id, item_id):
         return redirect(url_for('showItem', category_id = category_id, item_id = item_id))
       else:
         flash('Item name is required.')
-        return render_template('editItem.html', category = category, item = item)
+        return render_template('editItem.html', category = category, item = item, login_session=login_session)
     else:
-      return render_template('editItem.html', category = category, item = item)
+      return render_template('editItem.html', category = category, item = item, login_session=login_session)
   else:
     flash('You can only edit items created by you.')
-    return render_template('item.html', category = category, item = item)
+    return render_template('item.html', category = category, item = item, login_session=login_session)
 
 @app.route('/category/<int:category_id>/item/<int:item_id>/delete', methods=['POST', 'GET'])
 def deleteItem(category_id, item_id):
@@ -308,10 +308,10 @@ def deleteItem(category_id, item_id):
       session.commit()
       return redirect(url_for('showCategory', category_id = category_id))
     else:
-      return render_template('deleteItem.html', category = category, item = item)
+      return render_template('deleteItem.html', category = category, item = item, login_session=login_session)
   else:
     flash('You can only delete items created by you.')
-    return render_template('item.html', category = category, item = item)
+    return render_template('item.html', category = category, item = item, login_session=login_session)
 
 # JSON API endpoint to view all categories
 @app.route('/categories/JSON')
@@ -345,7 +345,7 @@ def itemJSON(item_id):
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    return render_template('404.html', login_session=login_session), 404
 
 if __name__ == '__main__':
   app.secret_key = 'secret_catalog_app'
