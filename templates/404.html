@@ -1,0 +1,9 @@
+{% extends "main.html" %}
+{% block content %}
+<a href="{{url_for('showCatalog')}}" class="flat-button">
+	<i class="mdi mdi-arrow-left"></i>
+	<span class="back-label">Catalog</span>
+</a>
+<h1 id="heading">Item Catalog</h1>
+<p class="not-found">Page does not exist</p>
+{% endblock %}

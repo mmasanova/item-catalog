@@ -343,6 +343,10 @@ def itemJSON(item_id):
   item = session.query(Item).filter_by(id = item_id).one()
   return jsonify(item = item.serialize)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 if __name__ == '__main__':
   app.secret_key = 'secret_catalog_app'
   app.debug = True
