@@ -241,6 +241,12 @@ form label, h2 {
 	text-align: center;
 }
 
+.center-span {
+	display: block;
+	width: 100%;
+    text-align: center;
+}
+
 @media screen and (min-width: 500px) {
 	body {
 		background-color: #efefef;

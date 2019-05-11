@@ -2,8 +2,8 @@
 {% block content %}
 <h1 id="heading">Item Catalog</h1>
 <div class='flash error'>
-		      {% with messages = get_flashed_messages() %}
-      {% if messages %}
+	{% with messages = get_flashed_messages() %}
+     	{% if messages %}
 
         <ul>
         {% for message in messages %}
@@ -21,7 +21,7 @@
 			</li>
 		{% endfor %}
 	{% else %}
-		<span>There are no categories.</span>
+		<span class="center-span">There are no categories.</span>
 	{% endif %}
 </ul>
 <a href="{{url_for('addCategory')}}" class="floating-button">
